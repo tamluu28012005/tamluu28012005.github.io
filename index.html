@@ -1,0 +1,2982 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Portfolio Lưu Nguyễn Nhựt Tâm - Kỹ thuật Điều khiển và Tự động hóa">
+
+    <title>Lưu Nguyễn Nhựt Tâm | Automation Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                        display: ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        .technical-grid {
+            background-image:
+                linear-gradient(rgba(79, 70, 229, .045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(79, 70, 229, .045) 1px, transparent 1px);
+
+            background-size: 32px 32px;
+        }
+
+        .dot-grid {
+            background-image:
+                radial-gradient(rgba(255, 255, 255, .12) 1px, transparent 1px);
+
+            background-size: 18px 18px;
+        }
+
+        /* Visual upgrade */
+        .font-display { font-family: "Space Grotesk", sans-serif; }
+        .gradient-text {
+            background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 48%, #06b6d4 100%);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .section-label {
+            display: inline-block;
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .btn-gradient {
+            background: linear-gradient(110deg, #4f46e5 0%, #7c3aed 52%, #06b6d4 115%);
+            background-size: 160% 160%;
+            transition: transform .28s ease, box-shadow .28s ease, background-position .35s ease;
+        }
+        .btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(79,70,229,.28), 0 8px 24px rgba(6,182,212,.18);
+            background-position: 100% 50%;
+        }
+        .icon-gradient {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed 55%, #06b6d4);
+            color: white;
+            box-shadow: 0 10px 28px rgba(79,70,229,.18);
+        }
+        .status-pulse { animation: signalPulse 2s ease-in-out infinite; }
+        @keyframes signalPulse {
+            0%,100% { box-shadow: 0 0 0 0 rgba(6,182,212,.32); opacity: 1; }
+            50% { box-shadow: 0 0 0 7px rgba(6,182,212,0); opacity: .82; }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+
+            transition:
+                opacity .65s ease,
+                transform .65s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: -8px;
+
+            width: 0;
+            height: 2px;
+
+            background: linear-gradient(90deg, #4f46e5, #06b6d4);
+
+            transition: width .25s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: #4f46e5;
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+
+            transition:
+                max-height .35s ease,
+                opacity .25s ease;
+        }
+
+        #mobileMenu.open {
+            max-height: 600px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Cards */
+        .card-hover {
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+        }
+
+        @media (hover:hover) {
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 22px 55px rgba(79, 70, 229, .13), 0 8px 28px rgba(6, 182, 212, .07);
+                border-color: #a5b4fc;
+            }
+
+            .portrait {
+                transition: transform .6s cubic-bezier(.2, .8, .2, 1);
+            }
+
+            .portrait-wrapper:hover .portrait {
+                transform: scale(1.025);
+            }
+        }
+
+        /* Back to top */
+        #backToTop {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Modal */
+        dialog::backdrop {
+            background: rgba(2, 6, 23, .72);
+            backdrop-filter: blur(5px);
+        }
+
+        dialog[open] {
+            animation: modalIn .25s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @media(max-width:639px) {
+            html {
+                scroll-padding-top: 74px;
+            }
+
+            section {
+                scroll-margin-top: 74px;
+            }
+
+            .technical-grid {
+                background-size: 24px 24px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+
+<body
+    class="bg-[#F8FAFC] text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+
+<!-- ====================================================== -->
+<!-- NAVIGATION -->
+<!-- ====================================================== -->
+
+<header id="navbar"
+    class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-all duration-300">
+
+    <div class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+        <div class="flex h-[72px] items-center justify-between lg:h-20">
+
+            <!-- Logo -->
+            <a href="#home"
+                class="font-display flex min-h-11 items-center text-xl font-extrabold tracking-[-0.05em] text-slate-950">
+
+                LNNT<span class="gradient-text">.</span>
+
+            </a>
+
+
+            <!-- Desktop menu -->
+            <nav class="hidden items-center gap-7 lg:flex">
+
+                <a href="#home"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Trang chủ
+                </a>
+
+                <a href="#about"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Giới thiệu
+                </a>
+
+                <a href="#skills"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Kỹ năng
+                </a>
+
+                <a href="#projects"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Dự án
+                </a>
+
+                <a href="#practice"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Thực hành
+                </a>
+
+                <a href="#education"
+                    class="nav-link text-sm font-semibold text-slate-600 transition hover:text-indigo-600">
+                    Học vấn
+                </a>
+
+            </nav>
+
+
+            <a href="#contact"
+                class="hidden min-h-11 items-center gap-2 rounded-full btn-gradient btn-glow px-5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/15 lg:inline-flex">
+
+                Liên hệ
+
+                <i data-lucide="arrow-up-right"
+                    class="h-4 w-4"></i>
+
+            </a>
+
+
+            <!-- Mobile button -->
+            <button id="menuButton"
+                class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-800 shadow-sm lg:hidden">
+
+                <i data-lucide="menu"
+                    class="h-5 w-5"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Mobile Menu -->
+
+    <div id="mobileMenu"
+        class="border-t border-slate-200 bg-white/95 backdrop-blur-xl lg:hidden">
+
+        <nav class="space-y-1 px-5 py-4">
+
+            <a href="#home"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Trang chủ
+            </a>
+
+            <a href="#about"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Giới thiệu
+            </a>
+
+            <a href="#skills"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Kỹ năng
+            </a>
+
+            <a href="#projects"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Dự án
+            </a>
+
+            <a href="#practice"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Thực hành
+            </a>
+
+            <a href="#education"
+                class="mobile-link block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50">
+                Học vấn
+            </a>
+
+            <a href="#contact"
+                class="mobile-link mt-3 flex min-h-12 items-center justify-center gap-2 rounded-xl btn-gradient btn-glow px-5 font-semibold text-white">
+
+                Liên hệ với tôi
+
+                <i data-lucide="arrow-right"
+                    class="h-4 w-4"></i>
+
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- ====================================================== -->
+<!-- HERO -->
+<!-- ====================================================== -->
+
+<section id="home"
+    class="technical-grid relative overflow-hidden bg-white pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-28 lg:pt-40">
+
+
+    <!-- Decorative backgrounds -->
+
+    <div
+        class="absolute -right-40 top-10 h-[500px] w-[500px] rounded-full bg-indigo-100/60 blur-3xl">
+    </div>
+
+    <div
+        class="absolute -left-48 top-72 h-80 w-80 rounded-full bg-blue-100/50 blur-3xl">
+    </div>
+
+    <div class="absolute left-[38%] top-24 h-72 w-72 rounded-full bg-cyan-200/30 blur-3xl"></div>
+
+
+    <div class="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div
+            class="grid items-center gap-12 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+
+
+            <!-- Hero text -->
+
+            <div class="reveal min-w-0">
+
+
+                <div
+                    class="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-3.5 py-2 font-mono text-[10px] font-semibold uppercase tracking-[.14em] text-indigo-700 shadow-sm sm:text-xs">
+
+                    <span
+                        class="status-pulse h-2 w-2 rounded-full bg-cyan-500">
+                    </span>
+
+                    Automation · Control · IoT
+
+                </div>
+
+
+                <p
+                    class="mb-3 text-base font-medium text-slate-500 sm:text-lg">
+
+                    Xin chào, tôi là
+
+                </p>
+
+
+                <h1
+                    class="font-display max-w-4xl text-[clamp(2.65rem,7vw,5.25rem)] font-extrabold leading-[.98] tracking-[-.055em] text-slate-950">
+
+                    Lưu Nguyễn
+
+                    <span
+                        class="gradient-text block">
+
+                        Nhựt Tâm.
+
+                    </span>
+
+                </h1>
+
+
+                <h2
+                    class="mt-5 text-xl font-bold tracking-tight text-slate-800 sm:text-2xl lg:text-3xl">
+
+                    Kỹ thuật Điều khiển & Tự động hóa
+
+                </h2>
+
+
+                <p
+                    class="mt-5 max-w-2xl text-[15.5px] leading-7 text-slate-600 sm:text-lg sm:leading-8">
+
+                    Định hướng phát triển trong lĩnh vực tự động hóa công nghiệp,
+                    hệ thống điều khiển, PLC, SCADA và ứng dụng IoT nhằm xây dựng
+                    các giải pháp vận hành thông minh, chính xác và hiệu quả.
+
+                </p>
+
+
+                <div
+                    class="mt-8 flex flex-col gap-3 min-[420px]:flex-row">
+
+
+                    <a href="#projects"
+                        class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl btn-gradient btn-glow px-6 font-semibold text-white shadow-xl shadow-indigo-600/20">
+
+                        Xem dự án
+
+                        <i data-lucide="arrow-right"
+                            class="h-4 w-4 transition-transform group-hover:translate-x-1">
+                        </i>
+
+                    </a>
+
+
+                    <a href="#contact"
+                        class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50">
+
+                        <i data-lucide="mail"
+                            class="h-4 w-4">
+                        </i>
+
+                        Liên hệ với tôi
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium text-slate-500">
+
+                    <span
+                        class="flex items-center gap-2">
+
+                        <span
+                            class="status-pulse h-2 w-2 rounded-full bg-cyan-500">
+                        </span>
+
+                        Automation Engineering
+
+                    </span>
+
+
+                    <span
+                        class="flex items-center gap-2">
+
+                        <i data-lucide="map-pin"
+                            class="h-4 w-4">
+                        </i>
+
+                        Việt Nam
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Hero image -->
+
+            <div
+                class="reveal relative mx-auto w-full max-w-[500px] lg:max-w-none">
+
+
+                <div
+                    class="absolute -inset-4 rounded-[36px] border border-indigo-100 bg-white/50">
+                </div>
+
+
+                <div
+                    class="portrait-wrapper relative overflow-hidden rounded-[28px] border border-white bg-slate-100 shadow-[0_35px_90px_-35px_rgba(15,23,42,.35)]">
+
+
+                    <div
+                        class="aspect-[4/5] sm:aspect-[5/6]">
+
+                        <img
+                            src="./assets/profile-main.jpg"
+                            alt="Lưu Nguyễn Nhựt Tâm"
+                            class="portrait h-full w-full object-cover object-center">
+
+                    </div>
+
+
+                    <div
+                        class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/45 via-transparent to-transparent p-5 pt-20">
+
+
+                        <div
+                            class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3 py-2 text-xs font-semibold text-slate-800 backdrop-blur">
+
+                            <span
+                                class="h-2 w-2 animate-pulse rounded-full bg-emerald-500">
+                            </span>
+
+                            Always learning
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Floating badges -->
+
+                <div
+                    class="absolute -left-3 top-[16%] hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-left-12">
+
+                    <div
+                        class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+
+                            <i data-lucide="cpu"
+                                class="h-5 w-5">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="text-xs text-slate-400">
+
+                                Technology
+
+                            </p>
+
+                            <p
+                                class="text-sm font-bold text-slate-900">
+
+                                PLC & SCADA
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="absolute -right-3 bottom-[16%] hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-right-10">
+
+                    <div
+                        class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-600">
+
+                            <i data-lucide="radio-tower"
+                                class="h-5 w-5">
+                            </i>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="text-xs text-slate-400">
+
+                                Focus
+
+                            </p>
+
+                            <p
+                                class="text-sm font-bold text-slate-900">
+
+                                IoT Integration
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- QUICK OVERVIEW -->
+<!-- ====================================================== -->
+
+<section
+    class="border-y border-slate-200 bg-[#F8FAFC] py-6 sm:py-8">
+
+    <div
+        class="mx-auto grid max-w-7xl grid-cols-2 gap-3 px-5 sm:px-6 lg:grid-cols-4 lg:px-8">
+
+
+        <div
+            class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+
+            <i data-lucide="settings"
+                class="mb-3 h-5 w-5 text-indigo-600">
+            </i>
+
+            <p class="font-bold text-slate-900">
+                Automation
+            </p>
+
+            <p
+                class="mt-1 text-xs leading-5 text-slate-500">
+
+                Hệ thống tự động hóa
+
+            </p>
+
+        </div>
+
+
+        <div
+            class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+
+            <i data-lucide="activity"
+                class="mb-3 h-5 w-5 text-indigo-600">
+            </i>
+
+            <p class="font-bold text-slate-900">
+                Control
+            </p>
+
+            <p
+                class="mt-1 text-xs leading-5 text-slate-500">
+
+                Điều khiển & giám sát
+
+            </p>
+
+        </div>
+
+
+        <div
+            class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+
+            <i data-lucide="microchip"
+                class="mb-3 h-5 w-5 text-indigo-600">
+            </i>
+
+            <p class="font-bold text-slate-900">
+                PLC & SCADA
+            </p>
+
+            <p
+                class="mt-1 text-xs leading-5 text-slate-500">
+
+                Lập trình & mô phỏng
+
+            </p>
+
+        </div>
+
+
+        <div
+            class="rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
+
+            <i data-lucide="network"
+                class="mb-3 h-5 w-5 text-indigo-600">
+            </i>
+
+            <p class="font-bold text-slate-900">
+                IoT
+            </p>
+
+            <p
+                class="mt-1 text-xs leading-5 text-slate-500">
+
+                Kết nối & ứng dụng
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- ABOUT -->
+<!-- ====================================================== -->
+
+<section id="about"
+    class="bg-white py-20 sm:py-24 lg:py-32">
+
+
+    <div
+        class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div
+            class="grid items-center gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20">
+
+
+            <!-- Image -->
+
+            <div
+                class="reveal relative mx-auto w-full max-w-md">
+
+
+                <div
+                    class="overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 shadow-xl">
+
+
+                    <div class="aspect-[4/5]">
+
+                        <img
+                            src="./assets/profile-about.jpg"
+                            alt="Lưu Nguyễn Nhựt Tâm"
+                            loading="lazy"
+                            class="h-full w-full object-cover"
+                            style="object-position:center 52%;">
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="absolute -bottom-5 -right-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:-right-6">
+
+                    <p
+                        class="font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                        Focus
+
+                    </p>
+
+                    <p
+                        class="mt-1 text-sm font-bold text-slate-900">
+
+                        Learn · Improve · Repeat
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- Text -->
+
+            <div class="reveal">
+
+
+                <p
+                    class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                    01 / Giới thiệu
+
+                </p>
+
+
+                <h2
+                    class="font-display mt-3 text-3xl font-extrabold tracking-[-.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+
+                    Về tôi
+
+                </h2>
+
+
+                <p
+                    class="mt-6 text-base leading-8 text-slate-600 sm:text-lg">
+
+                    Tôi định hướng trở thành một kỹ sư Tự động hóa,
+                    tập trung vào hệ thống điều khiển, PLC, SCADA
+                    và ứng dụng IoT trong môi trường công nghiệp.
+
+                </p>
+
+
+                <p
+                    class="mt-4 text-base leading-8 text-slate-600 sm:text-lg">
+
+                    Tôi đặc biệt quan tâm đến quá trình một hệ thống
+                    được thiết kế, lập trình, mô phỏng và vận hành.
+                    Thông qua các bài thực hành, mô hình và dự án,
+                    tôi từng bước phát triển khả năng phân tích,
+                    xử lý vấn đề và cải tiến hệ thống.
+
+                </p>
+
+
+                <div
+                    class="mt-9 grid gap-4 sm:grid-cols-3">
+
+
+                    <article
+                        class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+
+                        <i data-lucide="lightbulb"
+                            class="h-6 w-6 text-indigo-600">
+                        </i>
+
+                        <h3
+                            class="mt-4 font-bold text-slate-900">
+
+                            Sáng tạo
+
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm leading-6 text-slate-500">
+
+                            Tìm kiếm cách tiếp cận và giải pháp phù hợp.
+
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+
+                        <i data-lucide="shield-check"
+                            class="h-6 w-6 text-indigo-600">
+                        </i>
+
+                        <h3
+                            class="mt-4 font-bold text-slate-900">
+
+                            Trách nhiệm
+
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm leading-6 text-slate-500">
+
+                            Chủ động và nghiêm túc trong quá trình thực hiện.
+
+                        </p>
+
+                    </article>
+
+
+                    <article
+                        class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+
+                        <i data-lucide="trending-up"
+                            class="h-6 w-6 text-indigo-600">
+                        </i>
+
+                        <h3
+                            class="mt-4 font-bold text-slate-900">
+
+                            Cải tiến
+
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm leading-6 text-slate-500">
+
+                            Không ngừng học hỏi và hoàn thiện kỹ năng.
+
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- SKILLS -->
+<!-- ====================================================== -->
+
+<section id="skills"
+    class="bg-[#F8FAFC] py-20 sm:py-24 lg:py-32">
+
+
+    <div
+        class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div
+            class="reveal max-w-3xl">
+
+
+            <p
+                class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                02 / Kỹ năng
+
+            </p>
+
+
+            <h2
+                class="font-display mt-3 text-3xl font-extrabold tracking-[-.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+
+                Kỹ năng & Công nghệ
+
+            </h2>
+
+
+            <p
+                class="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
+
+                Nền tảng kỹ thuật tập trung vào Điều khiển & Tự động hóa,
+                kết hợp lập trình, mô phỏng và các công cụ thiết kế kỹ thuật.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div
+            class="mt-10 grid gap-5 lg:grid-cols-3">
+
+
+            <!-- Technical -->
+
+            <article
+                class="card-hover reveal rounded-3xl border border-slate-200 bg-white p-6 sm:p-7">
+
+
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
+
+                    <i data-lucide="cpu"
+                        class="h-6 w-6">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="mt-5 text-xl font-bold">
+
+                    Kỹ năng chuyên môn
+
+                </h3>
+
+
+                <div
+                    class="mt-5 flex flex-wrap gap-2">
+
+
+                    <span
+                        class="rounded-lg bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700">
+
+                        PLC Programming
+
+                    </span>
+
+
+                    <span
+                        class="rounded-lg bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-700">
+
+                        SCADA
+
+                    </span>
+
+
+                    <span
+                        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">
+
+                        Automation
+
+                    </span>
+
+
+                    <span
+                        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">
+
+                        Control Systems
+
+                    </span>
+
+
+                    <span
+                        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">
+
+                        IoT
+
+                    </span>
+
+
+                    <span
+                        class="rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700">
+
+                        Debugging
+
+                    </span>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- Tools -->
+
+            <article
+                class="card-hover reveal rounded-3xl border border-slate-200 bg-white p-6 sm:p-7">
+
+
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
+
+                    <i data-lucide="wrench"
+                        class="h-6 w-6">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="mt-5 text-xl font-bold">
+
+                    Công cụ & Công nghệ
+
+                </h3>
+
+
+                <div class="mt-6 space-y-5">
+
+
+                    <div>
+
+                        <p
+                            class="mb-2 font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                            PLC & Automation
+
+                        </p>
+
+                        <p
+                            class="text-sm leading-6 text-slate-600">
+
+                            TIA Portal V19 · S7-PLCSIM / PLCSIM Advanced · Factory I/O
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="mb-2 font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                            Embedded & Electronics
+
+                        </p>
+
+                        <p
+                            class="text-sm leading-6 text-slate-600">
+
+                            Arduino IDE · Proteus
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="mb-2 font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                            Programming
+
+                        </p>
+
+                        <p
+                            class="text-sm leading-6 text-slate-600">
+
+                            PyCharm
+
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <p
+                            class="mb-2 font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                            Engineering & Simulation
+
+                        </p>
+
+                        <p
+                            class="text-sm leading-6 text-slate-600">
+
+                            MATLAB R2024b · SOLIDWORKS 2024 · AutoCAD
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- Soft skills -->
+
+            <article
+                class="card-hover reveal rounded-3xl border border-slate-200 bg-white p-6 sm:p-7">
+
+
+                <div
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
+
+                    <i data-lucide="users"
+                        class="h-6 w-6">
+                    </i>
+
+                </div>
+
+
+                <h3
+                    class="mt-5 text-xl font-bold">
+
+                    Kỹ năng mềm
+
+                </h3>
+
+
+                <div
+                    class="mt-5 grid grid-cols-2 gap-2 text-sm">
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Tư duy logic
+
+                    </span>
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Giải quyết vấn đề
+
+                    </span>
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Làm việc nhóm
+
+                    </span>
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Tự học
+
+                    </span>
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Thích nghi
+
+                    </span>
+
+
+                    <span
+                        class="rounded-xl bg-slate-100 p-3 font-medium text-slate-700">
+
+                        Trách nhiệm
+
+                    </span>
+
+
+                </div>
+
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- PROJECTS -->
+<!-- ====================================================== -->
+
+<section id="projects"
+    class="bg-white py-20 sm:py-24 lg:py-32">
+
+
+    <div
+        class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div
+            class="reveal">
+
+
+            <p
+                class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                03 / Dự án
+
+            </p>
+
+
+            <h2
+                class="font-display mt-3 text-3xl font-extrabold tracking-[-.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+
+                Dự án & Mô hình tiêu biểu
+
+            </h2>
+
+
+            <p
+                class="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">
+
+                Các dự án và mô hình được thực hiện trong quá trình học tập,
+                thực hành và nghiên cứu về Điều khiển & Tự động hóa.
+
+            </p>
+
+
+        </div>
+
+
+
+        <!-- SMART PARKING FEATURED -->
+
+        <article
+            class="card-hover reveal mt-12 overflow-hidden rounded-[32px] border border-indigo-200 bg-[#07152E] text-white">
+
+
+            <div
+                class="grid lg:grid-cols-[.85fr_1.15fr]">
+
+
+                <!-- Visual -->
+
+                <div
+                    class="technical-grid relative flex min-h-[300px] items-center justify-center overflow-hidden bg-slate-50 p-8 sm:min-h-[400px]">
+
+
+                    <div
+                        class="absolute left-6 top-6">
+
+                        <span
+                            class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+
+                            <span
+                                class="h-2 w-2 animate-pulse rounded-full bg-emerald-500">
+                            </span>
+
+                            In Progress
+
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="relative">
+
+
+                        <div
+                            class="flex h-32 w-32 items-center justify-center rounded-[35px] border border-indigo-100 bg-white text-indigo-600 shadow-2xl">
+
+                            <i data-lucide="car-front"
+                                class="h-16 w-16">
+                            </i>
+
+                        </div>
+
+
+                        <div
+                            class="absolute -right-12 -top-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white text-indigo-600 shadow-lg">
+
+                            <i data-lucide="camera"
+                                class="h-6 w-6">
+                            </i>
+
+                        </div>
+
+
+                        <div
+                            class="absolute -bottom-8 -left-12 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-white text-indigo-600 shadow-lg">
+
+                            <i data-lucide="scan-line"
+                                class="h-6 w-6">
+                            </i>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Content -->
+
+                <div
+                    class="dot-grid p-7 sm:p-10 lg:p-12">
+
+
+                    <div
+                        class="flex flex-wrap items-center gap-3">
+
+
+                        <span
+                            class="font-mono text-xs font-semibold uppercase tracking-[.15em] text-indigo-300">
+
+                            IoT · Embedded System
+
+                        </span>
+
+
+                        <span
+                            class="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-slate-200">
+
+                            Current Project
+
+                        </span>
+
+
+                    </div>
+
+
+                    <h3
+                        class="font-display mt-5 text-3xl font-extrabold tracking-[-.04em] sm:text-4xl">
+
+                        Smart Parking System
+
+                    </h3>
+
+
+                    <p
+                        class="mt-2 font-mono text-sm font-semibold text-indigo-300">
+
+                        Operation Simulation
+
+                    </p>
+
+
+                    <p
+                        class="mt-6 text-sm leading-7 text-slate-300 sm:text-base">
+
+                        Dự án đang phát triển mô phỏng hệ thống bãi đỗ xe thông minh,
+                        tích hợp RFID để quản lý phương tiện vào/ra, cảm biến HC-SR04
+                        để giám sát trạng thái các vị trí đỗ và Servo để điều khiển
+                        barrier.
+
+                    </p>
+
+
+                    <p
+                        class="mt-4 text-sm leading-7 text-slate-300 sm:text-base">
+
+                        Hệ thống sử dụng ESP32 làm bộ điều khiển, kết hợp LCD hiển thị
+                        thông tin bãi xe, chức năng tìm vị trí xe và ESP32-CAM hỗ trợ
+                        ghi nhận phương tiện tại cổng vào và cổng ra.
+
+                    </p>
+
+
+                    <div
+                        class="mt-7 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            ESP32
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            ESP32-CAM
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            RFID RC522
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            HC-SR04
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            Servo
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            UART
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-slate-200">
+                            Wi-Fi
+                        </span>
+
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        data-project="parking"
+                        class="project-open mt-8 inline-flex min-h-11 items-center gap-2 font-semibold text-indigo-300 transition hover:text-white">
+
+                        Xem chi tiết hệ thống
+
+                        <i data-lucide="arrow-right"
+                            class="h-4 w-4">
+                        </i>
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- SCHOOL PROJECTS -->
+
+        <div
+            class="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+
+
+            <!-- Elevator -->
+
+            <article
+                class="card-hover reveal overflow-hidden rounded-3xl border border-slate-200 bg-white">
+
+
+                <div
+                    class="technical-grid flex aspect-[16/10] items-center justify-center bg-slate-50">
+
+
+                    <div
+                        class="flex h-20 w-20 items-center justify-center rounded-3xl border border-indigo-100 bg-white text-indigo-600 shadow-lg">
+
+                        <i data-lucide="building-2"
+                            class="h-9 w-9">
+                        </i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="p-6">
+
+
+                    <p
+                        class="font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                        Control System
+
+                    </p>
+
+
+                    <h3
+                        class="mt-3 text-xl font-bold text-slate-950">
+
+                        Mô hình điều khiển thang máy
+
+                    </h3>
+
+
+                    <p
+                        class="mt-3 text-sm leading-6 text-slate-500">
+
+                        Thực hành xây dựng logic điều khiển cho mô hình thang máy,
+                        xử lý yêu cầu gọi tầng và trình tự hoạt động của hệ thống.
+
+                    </p>
+
+
+                    <div
+                        class="mt-5 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            PLC
+
+                        </span>
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            Control Logic
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Conveyor -->
+
+            <article
+                class="card-hover reveal overflow-hidden rounded-3xl border border-slate-200 bg-white">
+
+
+                <div
+                    class="technical-grid flex aspect-[16/10] items-center justify-center bg-slate-50">
+
+
+                    <div
+                        class="flex h-20 w-20 items-center justify-center rounded-3xl border border-indigo-100 bg-white text-indigo-600 shadow-lg">
+
+                        <i data-lucide="boxes"
+                            class="h-9 w-9">
+                        </i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="p-6">
+
+
+                    <p
+                        class="font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                        PLC · Automation
+
+                    </p>
+
+
+                    <h3
+                        class="mt-3 text-xl font-bold text-slate-950">
+
+                        Băng chuyền phân loại sản phẩm
+
+                    </h3>
+
+
+                    <p
+                        class="mt-3 text-sm leading-6 text-slate-500">
+
+                        Thực hành điều khiển băng chuyền, xử lý tín hiệu cảm biến
+                        và xây dựng trình tự phân loại sản phẩm trên mô hình.
+
+                    </p>
+
+
+                    <div
+                        class="mt-5 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            PLC
+
+                        </span>
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            Sensor
+
+                        </span>
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            Automation
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+
+
+            <!-- Robot -->
+
+            <article
+                class="card-hover reveal overflow-hidden rounded-3xl border border-slate-200 bg-white md:col-span-2 lg:col-span-1">
+
+
+                <div
+                    class="technical-grid flex aspect-[16/10] items-center justify-center bg-slate-50">
+
+
+                    <div
+                        class="flex h-20 w-20 items-center justify-center rounded-3xl border border-indigo-100 bg-white text-indigo-600 shadow-lg">
+
+                        <i data-lucide="bot"
+                            class="h-9 w-9">
+                        </i>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="p-6">
+
+
+                    <p
+                        class="font-mono text-[10px] font-semibold uppercase tracking-widest text-indigo-600">
+
+                        Robotics
+
+                    </p>
+
+
+                    <h3
+                        class="mt-3 text-xl font-bold text-slate-950">
+
+                        Mô hình cánh tay robot
+
+                    </h3>
+
+
+                    <p
+                        class="mt-3 text-sm leading-6 text-slate-500">
+
+                        Thực hành điều khiển chuyển động của mô hình cánh tay robot
+                        phục vụ các thao tác gắp, di chuyển và đặt vật thể.
+
+                    </p>
+
+
+                    <div
+                        class="mt-5 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            Robotics
+
+                        </span>
+
+
+                        <span
+                            class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+
+                            Control
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- PRACTICE & SIMULATION -->
+<!-- ====================================================== -->
+
+<section id="practice"
+    class="bg-[#F8FAFC] py-20 sm:py-24 lg:py-32">
+
+
+    <div
+        class="mx-auto max-w-5xl px-5 sm:px-6 lg:px-8">
+
+
+        <div class="reveal">
+
+
+            <p
+                class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                04 / Thực hành
+
+            </p>
+
+
+            <h2
+                class="font-display mt-3 text-3xl font-extrabold tracking-[-.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+
+                Thực hành & Mô phỏng
+
+            </h2>
+
+
+            <p
+                class="mt-5 max-w-3xl text-base leading-7 text-slate-600 sm:text-lg">
+
+                Kinh nghiệm kỹ thuật được tích lũy chủ yếu thông qua
+                thực hành tại trường, các mô hình thiết bị và phần mềm mô phỏng.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div
+            class="reveal mt-12 rounded-3xl border border-slate-200 bg-white p-6 sm:p-8 lg:p-10">
+
+
+            <div
+                class="flex gap-5 sm:gap-8">
+
+
+                <div
+                    class="flex flex-col items-center">
+
+
+                    <div
+                        class="icon-gradient flex h-11 w-11 shrink-0 items-center justify-center rounded-full">
+
+                        <i data-lucide="wrench"
+                            class="h-5 w-5">
+                        </i>
+
+                    </div>
+
+
+                    <div
+                        class="mt-3 h-full w-px bg-slate-200">
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="pb-10">
+
+
+                    <p
+                        class="font-mono text-xs font-semibold uppercase tracking-wider text-indigo-600">
+
+                        Thực hành trên mô hình
+
+                    </p>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-slate-950">
+
+                        Hệ thống Điều khiển & Tự động hóa
+
+                    </h3>
+
+
+                    <p
+                        class="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+
+                        Thực hành trên các mô hình và thiết bị có sẵn tại trường,
+                        từng bước làm quen với lập trình điều khiển, kiểm tra hoạt động,
+                        xử lý lỗi và vận hành các hệ thống tự động hóa.
+
+                    </p>
+
+
+                    <div
+                        class="mt-5 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-medium text-indigo-700">
+                            PLC
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-medium text-indigo-700">
+                            Thang máy
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-medium text-indigo-700">
+                            Băng chuyền
+                        </span>
+
+                        <span
+                            class="rounded-lg bg-indigo-50 px-3 py-2 text-xs font-medium text-indigo-700">
+                            Cánh tay robot
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                class="flex gap-5 sm:gap-8">
+
+
+                <div
+                    class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border-2 border-indigo-200 bg-indigo-50 text-indigo-600">
+
+                    <i data-lucide="monitor-cog"
+                        class="h-5 w-5">
+                    </i>
+
+                </div>
+
+
+
+                <div>
+
+
+                    <p
+                        class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-500">
+
+                        Simulation
+
+                    </p>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-slate-950">
+
+                        PLC & Factory I/O Simulation
+
+                    </h3>
+
+
+                    <p
+                        class="mt-3 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
+
+                        Thực hiện các bài mô phỏng hệ thống tự động hóa,
+                        kết hợp lập trình PLC và Factory I/O để quan sát,
+                        kiểm tra logic điều khiển và đánh giá hoạt động
+                        của hệ thống trong môi trường mô phỏng.
+
+                    </p>
+
+
+                    <div
+                        class="mt-5 flex flex-wrap gap-2">
+
+
+                        <span
+                            class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+
+                            TIA Portal V19
+
+                        </span>
+
+
+                        <span
+                            class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+
+                            S7-PLCSIM
+
+                        </span>
+
+
+                        <span
+                            class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+
+                            Factory I/O
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- EDUCATION -->
+<!-- ====================================================== -->
+
+<section id="education"
+    class="bg-white py-20 sm:py-24 lg:py-32">
+
+
+    <div
+        class="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div class="reveal">
+
+
+            <p
+                class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                05 / Học vấn
+
+            </p>
+
+
+            <h2
+                class="font-display mt-3 text-3xl font-extrabold tracking-[-.04em] text-slate-950 sm:text-4xl lg:text-5xl">
+
+                Học vấn
+
+            </h2>
+
+
+        </div>
+
+
+
+        <article
+            class="card-hover reveal mt-10 max-w-4xl rounded-3xl border border-slate-200 bg-[#F8FAFC] p-6 sm:p-8 lg:p-10">
+
+
+            <div
+                class="icon-gradient flex h-14 w-14 items-center justify-center rounded-2xl">
+
+                <i data-lucide="graduation-cap"
+                    class="h-7 w-7">
+                </i>
+
+            </div>
+
+
+            <p
+                class="mt-7 font-mono text-xs font-semibold uppercase tracking-widest text-indigo-600">
+
+                Đại học Thủ Dầu Một · TDMU
+
+            </p>
+
+
+            <h3
+                class="font-display mt-3 text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">
+
+                Kỹ thuật Điều khiển & Tự động hóa
+
+            </h3>
+
+
+            <p
+                class="mt-5 max-w-3xl leading-7 text-slate-600">
+
+                Quá trình học tập tập trung vào nền tảng điều khiển,
+                tự động hóa, lập trình PLC, mô phỏng và các hệ thống
+                kỹ thuật phục vụ môi trường công nghiệp.
+
+            </p>
+
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ====================================================== -->
+<!-- CONTACT -->
+<!-- ====================================================== -->
+
+<section id="contact"
+    class="dot-grid relative overflow-hidden bg-[#07152E] py-20 text-white sm:py-24 lg:py-28">
+
+
+    <div
+        class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-indigo-600/20 blur-3xl">
+    </div>
+
+    <div class="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-cyan-400/15 blur-3xl"></div>
+
+
+    <div
+        class="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+
+
+        <div
+            class="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+
+
+            <div class="reveal">
+
+
+                <p
+                    class="section-label font-mono text-xs font-semibold uppercase tracking-[.16em]">
+
+                    06 / Liên hệ
+
+                </p>
+
+
+                <h2
+                    class="font-display mt-4 max-w-3xl text-3xl font-extrabold leading-tight tracking-[-.04em] sm:text-4xl lg:text-5xl">
+
+                    Cùng tạo nên những hệ thống thông minh hơn.
+
+                </h2>
+
+
+                <p
+                    class="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
+
+                    Tôi luôn sẵn sàng học hỏi, kết nối và trao đổi về
+                    những cơ hội giúp phát triển kỹ năng trong lĩnh vực
+                    Điều khiển & Tự động hóa.
+
+                </p>
+
+
+                <div
+                    class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+
+                    <a href="mailto:2325202160048@student.tdmu.edu.vn"
+                        class="group inline-flex min-h-12 items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 text-sm font-semibold text-slate-200 backdrop-blur-sm transition hover:border-indigo-400/50 hover:bg-white/10 hover:text-white">
+
+                        <span
+                            class="icon-gradient flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition">
+                            <i data-lucide="mail"
+                                class="h-4 w-4"></i>
+                        </span>
+
+                        2325202160048@student.tdmu.edu.vn
+
+                    </a>
+
+
+                    <a href="tel:+840946255564"
+                        class="group inline-flex min-h-12 items-center gap-3 rounded-xl border border-white/10 bg-white/5 px-4 text-sm font-semibold text-slate-200 backdrop-blur-sm transition hover:border-indigo-400/50 hover:bg-white/10 hover:text-white">
+
+                        <span
+                            class="icon-gradient flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition">
+                            <i data-lucide="phone"
+                                class="h-4 w-4"></i>
+                        </span>
+
+                        0946 255 564
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+            <a href="#home"
+                class="reveal inline-flex min-h-12 items-center justify-center gap-3 rounded-xl btn-gradient btn-glow px-6 font-semibold text-white">
+
+                Khám phá Portfolio
+
+                <i data-lucide="arrow-up"
+                    class="h-5 w-5">
+                </i>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- ====================================================== -->
+<!-- FOOTER -->
+<!-- ====================================================== -->
+
+<footer
+    class="border-t border-slate-200 bg-white py-7">
+
+
+    <div
+        class="mx-auto flex max-w-7xl flex-col gap-4 px-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+
+
+        <div
+            class="flex items-center gap-5">
+
+
+            <span
+                class="font-display font-extrabold tracking-[-.04em]">
+
+                LNNT<span class="gradient-text">.</span>
+
+            </span>
+
+
+            <p
+                class="text-xs text-slate-500">
+
+                © <span id="year"></span>
+                Lưu Nguyễn Nhựt Tâm.
+
+            </p>
+
+
+        </div>
+
+
+        <p
+            class="text-xs text-slate-400">
+
+            Automation · Control · IoT
+
+        </p>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- ====================================================== -->
+<!-- SMART PARKING MODAL -->
+<!-- ====================================================== -->
+
+<dialog id="projectDialog"
+    class="w-[calc(100%-32px)] max-w-2xl rounded-3xl bg-white p-0 shadow-2xl">
+
+
+    <div
+        class="max-h-[85vh] overflow-y-auto p-6 sm:p-8">
+
+
+        <div
+            class="flex items-start justify-between gap-5">
+
+
+            <div>
+
+
+                <div
+                    class="mb-3 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-2 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-700">
+
+                    <span
+                        class="h-2 w-2 rounded-full bg-emerald-500">
+                    </span>
+
+                    In Progress
+
+                </div>
+
+
+                <h2
+                    class="font-display text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">
+
+                    Smart Parking System
+
+                </h2>
+
+
+                <p
+                    class="mt-1 font-mono text-xs font-semibold text-indigo-600">
+
+                    Operation Simulation
+
+                </p>
+
+
+            </div>
+
+
+
+            <button id="closeDialog"
+                type="button"
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition hover:bg-slate-50">
+
+                <i data-lucide="x"
+                    class="h-5 w-5">
+                </i>
+
+            </button>
+
+
+        </div>
+
+
+
+        <p
+            class="mt-7 text-sm leading-7 text-slate-600 sm:text-base">
+
+            Hệ thống mô phỏng bãi đỗ xe thông minh gồm 5 vị trí
+            A01–A05, được thiết kế để hỗ trợ quản lý phương tiện,
+            giám sát vị trí đỗ và mô phỏng quy trình xe vào/ra.
+
+        </p>
+
+
+
+        <div
+            class="mt-7 grid gap-3 sm:grid-cols-2">
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="credit-card"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    RFID vào / ra
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    RC522 hỗ trợ nhận dạng và quản lý phương tiện
+                    tại cổng vào và cổng ra.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="scan-line"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    Giám sát vị trí đỗ
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    Cảm biến HC-SR04 theo dõi trạng thái
+                    của 5 vị trí A01 đến A05.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="move-horizontal"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    Barrier tự động
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    Servo được sử dụng để mô phỏng
+                    quá trình đóng và mở barrier.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="monitor"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    LCD hiển thị
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    Hiển thị thông tin trạng thái bãi xe
+                    và kết quả tìm vị trí xe.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="map-pin-search"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    Tìm vị trí xe
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    ESP32 riêng đảm nhiệm chức năng
+                    hỗ trợ xác định vị trí phương tiện.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="rounded-2xl bg-slate-50 p-4">
+
+                <i data-lucide="camera"
+                    class="h-5 w-5 text-indigo-600">
+                </i>
+
+                <h3
+                    class="mt-3 font-bold">
+
+                    Camera vào / ra
+
+                </h3>
+
+                <p
+                    class="mt-2 text-sm leading-6 text-slate-500">
+
+                    ESP32-CAM được bố trí tại hai cổng
+                    để hỗ trợ ghi nhận phương tiện.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div
+            class="mt-7 rounded-2xl border border-indigo-100 bg-indigo-50 p-5">
+
+
+            <p
+                class="font-mono text-[10px] font-bold uppercase tracking-widest text-indigo-600">
+
+                System Communication
+
+            </p>
+
+
+            <p
+                class="mt-3 text-sm leading-7 text-slate-600">
+
+                Các bộ điều khiển ESP32 được tổ chức thành các khối
+                quản lý bãi xe, tìm xe và camera. Dữ liệu giữa các
+                khối được trao đổi thông qua UART và kết nối Wi-Fi.
+
+            </p>
+
+
+        </div>
+
+
+
+        <div
+            class="mt-7 flex flex-wrap gap-2">
+
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                ESP32-S3
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                ESP32-CAM
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                HC-SR04
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                RC522 RFID
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                Servo
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                LCD 16x2
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                UART
+            </span>
+
+            <span
+                class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700">
+                Wi-Fi
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</dialog>
+
+
+
+<!-- ====================================================== -->
+<!-- BACK TO TOP -->
+<!-- ====================================================== -->
+
+<button id="backToTop"
+    class="fixed bottom-5 right-5 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-slate-950 text-white shadow-xl transition-all duration-300 hover:bg-indigo-600 sm:bottom-7 sm:right-7">
+
+    <i data-lucide="arrow-up"
+        class="h-5 w-5">
+    </i>
+
+</button>
+
+
+
+<!-- ====================================================== -->
+<!-- JAVASCRIPT -->
+<!-- ====================================================== -->
+
+<script>
+
+    /* Initialize icons */
+
+    lucide.createIcons();
+
+
+
+    /* Elements */
+
+    const navbar =
+        document.getElementById("navbar");
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
+    const backToTop =
+        document.getElementById("backToTop");
+
+    const year =
+        document.getElementById("year");
+
+
+    year.textContent =
+        new Date().getFullYear();
+
+
+
+    /* ================================================== */
+    /* MOBILE MENU */
+    /* ================================================== */
+
+    function setMenu(open) {
+
+        mobileMenu.classList.toggle(
+            "open",
+            open
+        );
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
+        menuButton.innerHTML =
+            open
+                ? '<i data-lucide="x" class="h-5 w-5"></i>'
+                : '<i data-lucide="menu" class="h-5 w-5"></i>';
+
+        lucide.createIcons();
+
+    }
+
+
+    menuButton.addEventListener(
+        "click",
+        () => {
+
+            const open =
+                menuButton.getAttribute("aria-expanded")
+                === "true";
+
+            setMenu(!open);
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(".mobile-link")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => setMenu(false)
+            );
+
+        });
+
+
+
+    /* ================================================== */
+    /* NAVBAR + BACK TO TOP */
+    /* ================================================== */
+
+    function updateScrollUI() {
+
+        if (window.scrollY > 20) {
+
+            navbar.classList.add(
+                "bg-white/90",
+                "backdrop-blur-xl",
+                "border-slate-200",
+                "shadow-sm"
+            );
+
+        } else {
+
+            navbar.classList.remove(
+                "bg-white/90",
+                "backdrop-blur-xl",
+                "border-slate-200",
+                "shadow-sm"
+            );
+
+        }
+
+
+        backToTop.classList.toggle(
+            "show",
+            window.scrollY > 500
+        );
+
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateScrollUI,
+        { passive: true }
+    );
+
+
+    updateScrollUI();
+
+
+    backToTop.addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+
+
+    /* ================================================== */
+    /* REVEAL ANIMATION */
+    /* ================================================== */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    if ("IntersectionObserver" in window) {
+
+        const revealObserver =
+            new IntersectionObserver(
+
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target
+                                .classList
+                                .add("visible");
+
+                            revealObserver
+                                .unobserve(
+                                    entry.target
+                                );
+
+                        }
+
+                    });
+
+                },
+
+                {
+                    threshold: .1,
+                    rootMargin:
+                        "0px 0px -40px 0px"
+                }
+
+            );
+
+
+        revealElements.forEach(
+            element =>
+                revealObserver.observe(element)
+        );
+
+    } else {
+
+        revealElements.forEach(
+            element =>
+                element.classList.add("visible")
+        );
+
+    }
+
+
+
+    /* ================================================== */
+    /* ACTIVE NAVIGATION */
+    /* ================================================== */
+
+    const sections =
+        document.querySelectorAll(
+            "main section[id]"
+        );
+
+    const navLinks =
+        document.querySelectorAll(
+            ".nav-link"
+        );
+
+
+    const sectionObserver =
+        new IntersectionObserver(
+
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        navLinks.forEach(
+                            link => {
+
+                                const target =
+                                    link
+                                        .getAttribute("href")
+                                        .replace("#", "");
+
+                                link.classList.toggle(
+                                    "active",
+                                    target ===
+                                    entry.target.id
+                                );
+
+                            }
+                        );
+
+                    }
+
+                });
+
+            },
+
+            {
+                rootMargin:
+                    "-35% 0px -55% 0px",
+
+                threshold: 0
+            }
+
+        );
+
+
+    sections.forEach(
+        section =>
+            sectionObserver.observe(section)
+    );
+
+
+
+    /* ================================================== */
+    /* SMART PARKING MODAL */
+    /* ================================================== */
+
+    const dialog =
+        document.getElementById(
+            "projectDialog"
+        );
+
+    const closeDialog =
+        document.getElementById(
+            "closeDialog"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".project-open"
+        )
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        typeof dialog.showModal
+                        === "function"
+                    ) {
+
+                        dialog.showModal();
+
+                    }
+
+                }
+            );
+
+        });
+
+
+    closeDialog.addEventListener(
+        "click",
+        () => dialog.close()
+    );
+
+
+    dialog.addEventListener(
+        "click",
+        event => {
+
+            const rect =
+                dialog.getBoundingClientRect();
+
+            const outside =
+
+                event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom;
+
+
+            if (outside) {
+
+                dialog.close();
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+</html>
